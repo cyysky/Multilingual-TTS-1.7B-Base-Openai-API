@@ -23,7 +23,8 @@ services:
       - driver: nvidia
         device_ids: ["1"]
         capabilities: ["gpu"]
-    command: ["bash", "-c", "exec python app.py >> server.log 2>&1"]
+    # Tee to container stdout (docker logs) and the mounted server.log
+    command: ["bash", "-c", "exec python app.py > >(/usr/bin/tee -a /app/server.log)"]
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8998/healthz', timeout=3)"]
       interval: 15s

@@ -113,7 +113,7 @@ Start / stop:
 ./start.sh                        # bare-metal fallback: port 8998 (GPU 1)
 docker compose up -d --build      # recommended: build + start on port 8998
 docker compose down               # stop (containers only)
-tail -f server.log                # live logs (container appends to this file)
+docker compose logs -f tts-server # live container logs (also appended to server.log)
 ```
 
 Add a voice: drop `voice.wav` (or mp3/flac/ogg/m4a) + `voice.txt` (its
