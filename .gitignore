@@ -1,0 +1,29 @@
+# Python
+venv/
+venv.broken/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Runtime artifacts
+server.log
+*.log
+server.pid
+nohup.out
+
+# Voice reference audio (personal/user data) — register voices via the API
+voices/*.wav
+voices/*.mp3
+voices/*.flac
+voices/*.ogg
+voices/*.m4a
+voices/*.aac
+voices/*.opus
+!voices/*.txt
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
