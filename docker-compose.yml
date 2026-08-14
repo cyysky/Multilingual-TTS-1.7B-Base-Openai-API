@@ -1,0 +1,32 @@
+services:
+  tts-server:
+    build: .
+    image: multilingual-tts-server:latest
+    container_name: tts-server
+    restart: unless-stopped
+    ports:
+      - "8998:8998"
+    environment:
+      PORT: "8998"
+      # The nvidia device request (gpus) already pins host GPU 1; inside the
+      # container that GPU is the only device, so it appears as CUDA device 0.
+      CUDA_VISIBLE_DEVICES: "0"
+      HF_HOME: /cache/huggingface
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    volumes:
+      - /home/gpusvr/hf-models/Multilingual-TTS-1.7B-Base:/home/gpusvr/hf-models/Multilingual-TTS-1.7B-Base:ro
+      - /home/gpusvr/.cache/huggingface:/cache/huggingface:ro
+      - ./voices:/app/voices
+      - ./server.log:/app/server.log
+    gpus:
+      - driver: nvidia
+        device_ids: ["1"]
+        capabilities: ["gpu"]
+    command: ["bash", "-c", "exec python app.py >> server.log 2>&1"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8998/healthz', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 300s

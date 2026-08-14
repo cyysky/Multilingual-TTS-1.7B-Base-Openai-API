@@ -1,0 +1,9 @@
+venv/
+venv.broken/
+__pycache__/
+*.py[cod]
+.git/
+.gitignore
+server.log
+server.pid
+voices/

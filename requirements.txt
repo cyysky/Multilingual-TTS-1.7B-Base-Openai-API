@@ -1,0 +1,21 @@
+--extra-index-url https://download.pytorch.org/whl/cu130
+
+accelerate==1.14.0
+einops==0.8.2
+einx==0.4.3
+fastapi==0.141.1
+hyper-connections==0.4.11
+local-attention==1.11.2
+neucodec==0.0.6
+numpy==2.2.6
+sentencepiece==0.2.2
+soundfile==0.14.0
+tiktoken==0.13.0
+torch==2.13.0+cu130
+torch-einops-utils==0.1.19
+torchao==0.13.0
+torchaudio==2.11.0+cu130
+torchtune==0.6.1
+transformers==5.15.0
+uvicorn==0.52.3
+vector-quantize-pytorch==1.17.8

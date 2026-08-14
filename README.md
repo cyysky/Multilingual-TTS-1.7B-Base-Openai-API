@@ -110,8 +110,10 @@ long one; `queue_waiting`/`current.elapsed_sec` show that clearly.
 Start / stop:
 
 ```bash
-./start.sh                 # starts on port 8998 (GPU 1), writes server.pid / server.log
-kill $(cat server.pid)     # stop
+./start.sh                        # bare-metal fallback: port 8998 (GPU 1)
+docker compose up -d --build      # recommended: build + start on port 8998
+docker compose down               # stop (containers only)
+tail -f server.log                # live logs (container appends to this file)
 ```
 
 Add a voice: drop `voice.wav` (or mp3/flac/ogg/m4a) + `voice.txt` (its
